@@ -27,6 +27,9 @@ import net.openid.conformance.condition.client.CheckIfTokenEndpointResponseError
 import net.openid.conformance.condition.client.CheckMatchingCallbackParameters;
 import net.openid.conformance.condition.client.CheckServerKeysIsValid;
 import net.openid.conformance.condition.client.CheckStateInAuthorizationResponse;
+import net.openid.conformance.condition.client.CheckTokenEndpointCacheHeaders;
+import net.openid.conformance.condition.client.CheckTokenEndpointHttpStatus200;
+import net.openid.conformance.condition.client.CheckTokenEndpointReturnedJsonContentType;
 import net.openid.conformance.condition.client.ConfigurationRequestsTestIsSkipped;
 import net.openid.conformance.condition.client.CreateAuthorizationEndpointRequestFromClientInformation;
 import net.openid.conformance.condition.client.CreateRandomNonceValue;
@@ -622,6 +625,9 @@ public abstract class AbstractOIDCCServerTest extends AbstractRedirectServerTest
 
 	protected void requestAuthorizationCode() {
 		callAndStopOnFailure(CallTokenEndpoint.class);
+		callAndContinueOnFailure(CheckTokenEndpointHttpStatus200.class, ConditionResult.FAILURE, "RFC6749-5.1");
+		callAndContinueOnFailure(CheckTokenEndpointReturnedJsonContentType.class, ConditionResult.FAILURE, "RFC6749-5.1");
+		callAndContinueOnFailure(CheckTokenEndpointCacheHeaders.class, ConditionResult.FAILURE,  "RFC6749-5.1");
 		callAndStopOnFailure(CheckIfTokenEndpointResponseError.class);
 		callAndStopOnFailure(CheckForAccessTokenValue.class);
 		callAndStopOnFailure(ExtractAccessTokenFromTokenResponse.class);

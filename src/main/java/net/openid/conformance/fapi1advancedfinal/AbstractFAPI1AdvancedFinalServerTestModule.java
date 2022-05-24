@@ -496,6 +496,9 @@ public abstract class AbstractFAPI1AdvancedFinalServerTestModule extends Abstrac
 
 		eventLog.startBlock(currentClientString() + "Verify token endpoint response");
 
+		callAndContinueOnFailure(CheckTokenEndpointHttpStatus200.class, ConditionResult.FAILURE, "RFC6749-5.1");
+		callAndContinueOnFailure(CheckTokenEndpointReturnedJsonContentType.class, ConditionResult.FAILURE, "RFC6749-5.1");
+		callAndContinueOnFailure(CheckTokenEndpointCacheHeaders.class, ConditionResult.FAILURE,  "RFC6749-5.1");
 		callAndStopOnFailure(CheckIfTokenEndpointResponseError.class);
 
 		callAndStopOnFailure(CheckForAccessTokenValue.class, "FAPI1-BASE-5.2.2-14");
