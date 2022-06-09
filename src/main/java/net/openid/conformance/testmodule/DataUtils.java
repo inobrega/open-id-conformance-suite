@@ -1,19 +1,13 @@
 package net.openid.conformance.testmodule;
 
-import com.google.gson.Gson;
-import com.google.gson.JsonArray;
-import com.google.gson.JsonObject;
-import com.google.gson.JsonParser;
+import com.google.gson.*;
 import net.openid.conformance.condition.Condition;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.MediaType;
 import org.springframework.util.MultiValueMap;
 
 import java.nio.charset.StandardCharsets;
-import java.util.Arrays;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 import java.util.stream.Collectors;
 
 /**
@@ -155,7 +149,17 @@ public interface DataUtils {
 	public default HttpHeaders headersFromJson(JsonObject headerJson, HttpHeaders headers) {
 		if (headerJson != null) {
 			for (String header : headerJson.keySet()) {
-				headers.set(header, OIDFJSON.getString(headerJson.get(header)));
+				JsonElement jsonElement = headerJson.get(header);
+				if(jsonElement.isJsonArray()){
+					JsonArray jsonArray = jsonElement.getAsJsonArray();
+					List<String> strings = new LinkedList<>();
+					for (int i = 0; i < jsonArray.size(); i++) {
+						strings.add(OIDFJSON.getString(jsonArray.get(i)));
+					}
+					headers.addAll(header,strings);
+				} else {
+					headers.set(header, OIDFJSON.getString(jsonElement));
+				}
 			}
 		}
 		return headers;
