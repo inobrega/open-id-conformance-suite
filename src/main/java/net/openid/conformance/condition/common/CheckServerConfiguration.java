@@ -10,7 +10,7 @@ public class CheckServerConfiguration extends AbstractCheckServerConfiguration {
 	@Override
 	protected List<String> getExpectedListEndpoint() {
 		return ImmutableList.of("authorization_endpoint",
-			"token_endpoint",
+//			"token_endpoint",
 			"issuer");
 	}
 

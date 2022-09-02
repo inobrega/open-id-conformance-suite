@@ -402,7 +402,7 @@ public abstract class AbstractOIDCCServerTest extends AbstractRedirectServerTest
 		skipTestIfScopesNotSupported();
 
 		// Set up the resource endpoint configuration
-		callAndStopOnFailure(SetProtectedResourceUrlToUserInfoEndpoint.class);
+		//callAndStopOnFailure(SetProtectedResourceUrlToUserInfoEndpoint.class);
 
 		// Perform any custom configuration
 		onConfigure(config, baseUrl);
