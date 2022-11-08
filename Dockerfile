@@ -1,6 +1,6 @@
 FROM openjdk:11-jdk-slim
 COPY target/fapi-test-suite.jar /server/
-ENV BASE_URL https://localhost:8443
+ENV BASE_URL https://localhost:8446
 ENV MONGODB_HOST mongodb
 ENV JAVA_EXTRA_ARGS=
 EXPOSE 8080
