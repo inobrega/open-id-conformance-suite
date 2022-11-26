@@ -19,7 +19,7 @@ services:
     command: >
       java
       -jar /server/fapi-test-suite.jar
-      --fintechlabs.base_url=conformation.testing.mvp.openligia.com:8446
+      --fintechlabs.base_url=https://conformation.testing.mvp.openligia.com:8446
       --fintechlabs.devmode=true
       --fintechlabs.startredir=true
     links:
